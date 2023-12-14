@@ -10,11 +10,13 @@ export interface IRawUser {
     updatedAt: Date;
 }
 
-export interface IRawUserMethods {}
+export interface IRawUserMethods {
+    getAvatarUrl(): string | undefined;
+}
 
 export interface IUserModel extends Model<IRawUser, {}, IRawUserMethods> {}
 
-export type UserDocument = HydratedDocument<IRawUser>;
+export type UserDocument = HydratedDocument<IRawUser, IRawUserMethods>;
 
 export interface IUser {
     id: Types.ObjectId;

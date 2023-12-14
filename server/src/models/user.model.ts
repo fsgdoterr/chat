@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { IRawUser, IRawUserMethods, IUserModel } from '../interfaces/user.interfaces';
 
+
 const userSchema = new Schema<IRawUser, IUserModel, IRawUserMethods>({
     email: {type: String, required: true, unique: true},
     name: {type: String, required: true},
@@ -11,6 +12,12 @@ const userSchema = new Schema<IRawUser, IUserModel, IRawUserMethods>({
     versionKey: false,
     timestamps: true,
 });
+
+userSchema.method('getAvatarUrl', function getAvatarUrl() {
+    if(!this.avatar) return;
+    const url: URL = new URL(`/public/avatars/${this.avatar}`, process.env.CLIENT_URL);
+    return url.href
+})
 
 const userModel = model<IRawUser, IUserModel>('User', userSchema);
 

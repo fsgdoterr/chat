@@ -17,7 +17,9 @@ const app = express();
 app.use(express.json());
 app.use(cors({
     origin: process.env.API_URL,
-    credentials: true
+    credentials: true,
+    exposedHeaders: ['access-token', 'total-count'],
+    allowedHeaders: ['_limit', '_offset']
 }));
 app.use(cookieParser());
 app.use(fileUpload());
@@ -33,3 +35,5 @@ const startApp = async () => {
         console.log(e);
     }
 }
+
+startApp();
