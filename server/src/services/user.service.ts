@@ -1,7 +1,7 @@
 import { v4 } from 'uuid';
 import userModel from '../models/user.model';
 import mailService from './mail.service';
-import { IUser } from '../interfaces/user.interfaces';
+import { IPublicUser, IUser } from '../interfaces/user.interfaces';
 import { ApiError } from '../utils/api.error';
 import { TIME } from '../utils/consts';
 import bcrypt from 'bcrypt';
@@ -33,7 +33,11 @@ class UserService {
         return true;
     }
 
-    async changePassword(email: string, forgotPasswordCode: string, password: string): Promise<IUser> {
+    async changePassword(
+        email: string, 
+        forgotPasswordCode: string, 
+        password: string
+    ): Promise<IUser> {
     
         const hashPassword = await bcrypt.hash(password, 5);
 
@@ -59,7 +63,11 @@ class UserService {
         return userDto.getDto();
     }
 
-    async update(userId: Types.ObjectId, name: string, avatar: UploadedFile): Promise<IUser> {
+    async update(
+        userId: Types.ObjectId, 
+        name: string, 
+        avatar: UploadedFile
+    ): Promise<IUser> {
     
         const candidate = await userModel.findByIdAndUpdate(
             userId,
@@ -82,6 +90,35 @@ class UserService {
         const userDto = new UserDTO(candidate);
 
         return userDto.getDto();
+    }
+
+    async addLink(
+        firstUser: Types.ObjectId, 
+        secondUser: Types.ObjectId
+    ): Promise<void> {
+        await userModel.findByIdAndUpdate(firstUser, { $addToSet: {chats: secondUser} });
+        await userModel.findByIdAndUpdate(secondUser, { $addToSet: {chats: firstUser} });
+    }
+
+    async getAll(
+        id: Types.ObjectId | string, 
+        limit: number = 10, 
+        offset: number = 0
+    ): Promise<{users: IPublicUser[], totalCount: number}> {
+
+        const query = {
+            _id: { $ne: id }
+        }
+
+        const users = await userModel.find(query).limit(limit).skip(offset);
+
+        const totalCount = await userModel.countDocuments(query);
+
+        return {
+            users: users.map(user => new UserDTO(user).getPublicDto()),
+            totalCount
+        }
+
     }
 
 }

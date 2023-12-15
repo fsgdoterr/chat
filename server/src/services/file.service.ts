@@ -75,9 +75,32 @@ class FileService {
         });
     }
 
-    // async uploadFile(file: UploadedFile, fileName: string): Promise<string> {
-        
-    // }
+    async uploadFile(file: UploadedFile): Promise<string> {
+        const { mimetype, name, mv } = file;
+
+        let type = mimetype.split('/').shift();
+        if(type !== 'video' && type !== 'image') type = 'document';
+
+        const fileName = `${v4()}${path.extname(name)}`;
+        const filePath = path.resolve(__dirname, '..', '..', 'static', type, fileName);
+        const dirPath = path.dirname(filePath);
+
+        await this.makeDir(dirPath);
+
+        mv(filePath);
+
+        return fileName;
+    }
+
+    async removeFile(type: string, name: string): Promise<string> {
+        return new Promise((res, rej) => {
+            const filePath = path.resolve(__dirname, '..', '..', 'static', type, name);
+            fs.rm(filePath, (err) => {
+                if(err) return rej(err);
+                return res(filePath);
+            })
+        });
+    }
 }
 
 export default new FileService();

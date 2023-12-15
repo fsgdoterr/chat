@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import userController from '../controllers/user.controller';
 import { body } from 'express-validator';
-import validateMiddleware from '../midlewares/validate.middleware';
-import authMiddleware from '../midlewares/auth.middleware';
-import fileMiddleware from '../midlewares/file.middleware';
+import validateMiddleware from '../middlewares/validate.middleware';
+import authMiddleware from '../middlewares/auth.middleware';
+import fileMiddleware from '../middlewares/file.middleware';
+import { FILE_SIZE, IMAGE_MIMES } from '../utils/consts';
 
 const userRouter = Router();
 
@@ -40,10 +41,22 @@ userRouter.patch(
         avatar: {
             required: false,
             isArray: false,
+            mimetypes: [
+                IMAGE_MIMES.JPEG,
+                IMAGE_MIMES.PNG,
+                IMAGE_MIMES.WEBP,
+            ],
+            maxSize: 10 * FILE_SIZE.MB,
         }
     }),
     authMiddleware,
     userController.update,
+);
+
+userRouter.get(
+    '/search',
+    authMiddleware,
+    userController.getAll
 );
 
 

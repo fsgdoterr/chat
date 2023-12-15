@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import fileUpload from 'express-fileupload';
 import { Application } from 'express-ws';
 import router from './routes';
-import errorMiddleware from './midlewares/error.middleware';
+import errorMiddleware from './middlewares/error.middleware';
 import path from 'path';
 
 const PORT = process.env.PORT;

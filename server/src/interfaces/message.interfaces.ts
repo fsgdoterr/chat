@@ -1,5 +1,5 @@
-import { HydratedDocument, Model, Types } from "mongoose";
-import { IAttachment } from "./attachment.interfaces";
+import { Document, HydratedDocument, Model, ObjectId, PopulatedDoc, Types } from "mongoose";
+import { AttachmentDocument, IAttachment, IRawAttachment } from "./attachment.interfaces";
 
 export interface IRawMessage {
     senderId: Types.ObjectId;
@@ -15,7 +15,13 @@ export interface IRawMessageMethods {}
 
 export interface IMessageModel extends Model<IRawMessage, {}, IRawMessageMethods> {}
 
-export type MessageDocument = HydratedDocument<IRawMessage>;
+export type MessageDocumentWithoutAttachments = HydratedDocument<IRawMessage, {}, IRawMessageMethods>;
+
+export interface MessageDocumentWithAttachments extends Omit<MessageDocumentWithoutAttachments, 'attachments'> {
+    attachments: AttachmentDocument[];
+}
+
+export type MessageDocument = MessageDocumentWithoutAttachments | MessageDocumentWithAttachments;
 
 export interface IMessage {
     id: Types.ObjectId;

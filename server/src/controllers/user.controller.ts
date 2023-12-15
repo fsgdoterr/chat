@@ -53,6 +53,23 @@ class UserController {
         }
     }
 
+    async getAll(req: Request, res: Response, next: NextFunction) {
+        try {
+            const {
+                user: { id },
+                headers: { _limit, _offset },
+            } = req;
+
+            const { users, totalCount} = await userService.getAll(id, _limit ? +_limit : 10, _offset ? +_offset : 0);
+
+            res.setHeader('total-count', totalCount);
+
+            res.json(users);
+        } catch(e) {
+            next(e);
+        }
+    }
+
 }
 
 export default new UserController();
