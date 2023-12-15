@@ -8,6 +8,7 @@ import fileUpload from 'express-fileupload';
 import { Application } from 'express-ws';
 import router from './routes';
 import errorMiddleware from './midlewares/error.middleware';
+import path from 'path';
 
 const PORT = process.env.PORT;
 const API_VERSION = parseInt(packageJson.version);
@@ -24,6 +25,7 @@ app.use(cors({
 app.use(cookieParser());
 app.use(fileUpload());
 app.use(`/api/v${API_VERSION}`, router);
+app.use('/public', express.static(path.resolve(__dirname, '..', 'static')));
 app.use(errorMiddleware);
 
 

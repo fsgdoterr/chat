@@ -26,6 +26,8 @@ export default (req: Request, res: Response, next: NextFunction) => {
 
         req.user = userData;
 
+        next();
+
     } catch(e) {
         throw ApiError.unauthorized();
     }

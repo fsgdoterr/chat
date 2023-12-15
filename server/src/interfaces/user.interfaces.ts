@@ -5,6 +5,8 @@ export interface IRawUser {
     name: string;
     password: string;
     avatar?: string;
+    forgotPasswordCode?: string;
+    forgotPasswordTime?: Date;
     chats: Types.ObjectId[];
     createdAt: Date;
     updatedAt: Date;
