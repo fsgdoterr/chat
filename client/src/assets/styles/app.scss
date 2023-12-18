@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+html,
+body,
+#root,
+.app,
+.h-full {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: normal;
+}
+
+h1 {
+    font-size: 5.875em;
+}
+
+h2 {
+    font-size: 3.6875em;
+}
+
+h3 {
+    font-size: 2.9375em;
+}
+
+h4 {
+    font-size: 2.0625em;
+}
+
+h5 {
+    font-size: 1.5em;
+}
+
+h6 {
+    font-size: 1.25em;
+}
+
+p {
+    font-size: 1em;
+}
+
+svg, img {
+    display: block;
+}

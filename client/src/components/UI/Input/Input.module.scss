@@ -1,0 +1,43 @@
+@import '../../../utils/colors.scss';
+
+.input {
+    border-radius: 20px;
+    border: solid 1px $borders;
+    display: inline-flex;
+    padding: 4px 16px;
+    transition: .2s ease;
+    align-items: center;
+
+    input {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+        font-size: 1em;
+        line-height: 1.25em;
+        padding: 6px 0;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::placeholder {
+            font-size: 1em;
+            line-height: 1.25em;
+            color: $text-low-emphasis;
+        }
+    }
+
+    &.focus {
+        border-color: $accent-primary;
+    }
+
+    .beforeInput, .afterInput {
+        min-width: 32px;
+        min-height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
