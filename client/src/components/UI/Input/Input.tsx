@@ -1,4 +1,4 @@
-import React, { FC, InputHTMLAttributes, useState } from 'react'
+import React, { FC, InputHTMLAttributes, forwardRef, useState } from 'react'
 import styles from './Input.module.scss';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,14 +7,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     afterInput?: JSX.Element;
 }
 
-const Input: FC<InputProps> = ({
+const Input = forwardRef<HTMLInputElement, InputProps>(({
     className,
     beforeInput,
     afterInput,
     onFocus,
     onBlur,
     ...rest
-}) => {
+}, ref) => {
 
     const [focus, setFocus] = useState<boolean>(false);
 
@@ -40,10 +40,11 @@ const Input: FC<InputProps> = ({
                 {...rest}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                />
+                ref={ref}
+            />
             {afterInput && <div className={styles.afterInput}>{afterInput}</div>}
         </div>
     )
-}
+})
 
 export default Input

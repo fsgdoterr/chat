@@ -8,6 +8,12 @@
     transition: .2s ease;
     align-items: center;
 
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0px 40rem #ffff inset;
+    }
+
     input {
         background: transparent;
         border: none;
@@ -17,6 +23,7 @@
         font-size: 1em;
         line-height: 1.25em;
         padding: 6px 0;
+        width: 100%;
 
         &:focus {
             outline: none;

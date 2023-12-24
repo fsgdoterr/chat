@@ -1,4 +1,5 @@
 import Empty from "../pages/Empty/Empty";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
 import IRoute from "../types/models/IRoute";
@@ -14,6 +15,11 @@ const routes: IRoute[] = [
     {
         path: PUBLIC_ROUTES.SIGN_UP,
         component: SignUp,
+        modifier: ROUTE_MODIFIER.PUBLIC,
+    },
+    {
+        path: PUBLIC_ROUTES.FORGOT_PASSWORD,
+        component: ForgotPassword,
         modifier: ROUTE_MODIFIER.PUBLIC,
     },
     {

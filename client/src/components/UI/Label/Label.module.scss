@@ -1,0 +1,11 @@
+.label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.labelspan {
+    font-size: 13px;
+    font-weight: 600;
+}

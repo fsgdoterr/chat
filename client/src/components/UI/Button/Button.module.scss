@@ -1,11 +1,49 @@
+@import '../../../utils/colors.scss';
+
 .button {
     min-width: 40px;
     min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;  
+    border: none;
+    cursor: pointer;
+    background: $accent-primary;
+    color: #fff;
+    position: relative;
+    transition: .2s ease;
+
+    &[disabled] {
+        background: $disabled;
+        cursor: default;
+    }
+
+    &:active {
+        background: $accent-primary-pressed;
+    }
+}
+
+.circle {
+    border-radius: 100%; 
+}
+
+.default {
+    border-radius: 100px
+}
+
+.loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .transparent {
+    background: transparent;
+}
 
+.loading {
+    .inner {
+        opacity: 0;
+    }
 }

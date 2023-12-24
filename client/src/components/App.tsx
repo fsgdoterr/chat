@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import AppRouter from './AppRouter'
-import { useAppDispatch } from '../hooks/redux'
-import { setFirstLoad } from '../store/slices/account.slice';
 import '../assets/styles/app.scss';
+import { useRefresh } from '../hooks/useRefresh';
 
 const App = () => {
 
-    const dispatch = useAppDispatch();
+    const isLoading = useRefresh();
 
-    useEffect(() => {
-        dispatch(setFirstLoad(true));
-    }, []);
+    if(isLoading) {
+        return(
+            <></>
+        );
+    }
 
 
     return (

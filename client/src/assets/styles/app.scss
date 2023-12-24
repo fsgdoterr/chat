@@ -56,3 +56,17 @@ p {
 svg, img {
     display: block;
 }
+
+.d-flex {
+    display: flex;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.svg {
+    width: 20px;
+    height: 20px;
+}
