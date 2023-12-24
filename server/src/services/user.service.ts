@@ -1,13 +1,13 @@
 import { v4 } from 'uuid';
 import userModel from '../models/user.model';
 import mailService from './mail.service';
-import { IPublicUser, IUser } from '../interfaces/user.interfaces';
+import { IPublicUser, IRawUser, IUser } from '../interfaces/user.interfaces';
 import { ApiError } from '../utils/api.error';
 import { TIME } from '../utils/consts';
 import bcrypt from 'bcrypt';
 import { UserDTO } from '../dtos/user.dto';
 import { UploadedFile } from 'express-fileupload';
-import { Types } from 'mongoose';
+import { FilterQuery, Types } from 'mongoose';
 import fileService from './file.service';
 
 
@@ -103,12 +103,15 @@ class UserService {
     async getAll(
         id: Types.ObjectId | string, 
         limit: number = 10, 
-        offset: number = 0
+        offset: number = 0,
+        search?: string,
     ): Promise<{users: IPublicUser[], totalCount: number}> {
 
-        const query = {
+        const query: FilterQuery<IRawUser> = {
             _id: { $ne: id }
         }
+        if(search && typeof search === 'string')
+            query.name = new RegExp(search, 'i');
 
         const users = await userModel.find(query).limit(limit).skip(offset);
 

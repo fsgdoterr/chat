@@ -57,10 +57,11 @@ class UserController {
         try {
             const {
                 user: { id },
+                query: { s },
                 headers: { _limit, _offset },
             } = req;
 
-            const { users, totalCount} = await userService.getAll(id, _limit ? +_limit : 10, _offset ? +_offset : 0);
+            const { users, totalCount} = await userService.getAll(id, _limit ? +_limit : 10, _offset ? +_offset : 0, s as string);
 
             res.setHeader('total-count', totalCount);
 
