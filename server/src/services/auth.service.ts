@@ -12,7 +12,7 @@ class AuthService {
         email: string, 
         password: string, 
     ) {
-        const candidate = await userModel.findOne({email});
+        const candidate = await userModel.findOne({email}).populate('chats');
         if(!candidate)
             throw ApiError.badRequest('No user with this email and password pair was found');
 
@@ -54,7 +54,7 @@ class AuthService {
         if(!userFromToken)
             throw ApiError.unauthorized();
 
-        const user = await userModel.findById(userFromToken.id);
+        const user = await userModel.findById(userFromToken.id).populate('chats');
 
         const userDto = new UserDTO(user!);
         return userDto.getDto();
