@@ -5,7 +5,7 @@ export default interface IAccount {
     email: string;
     name: string;
     avatar?: string;
-    chats: string[] | IUser;
+    chats: IUser[];
     createdAt: string;
     updatedAt: string;
 }

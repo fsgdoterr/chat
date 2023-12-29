@@ -40,6 +40,10 @@
 
 .transparent {
     background: transparent;
+
+    &:active {
+        background: $borders;
+    }
 }
 
 .loading {

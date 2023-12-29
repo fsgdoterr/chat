@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import IAccount from "../types/models/IAccount";
 import { $api } from "./axios.instance";
+import IUser from "../types/models/IUser";
 
 export class UserApi {
 
@@ -16,6 +17,11 @@ export class UserApi {
             password,
             confirmPassword,
         });
+        return response;
+    }
+
+    static async search(s: string): Promise<AxiosResponse<IUser[]>> {
+        const response = await $api.get<IUser[]>(`/user/search?s=${s}`);
         return response;
     }
 

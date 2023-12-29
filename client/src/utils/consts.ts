@@ -13,7 +13,8 @@ export enum PUBLIC_ROUTES {
 }
 
 export enum PRIVATE_ROUTES {
-    EMPTY = '/'
+    EMPTY = '/',
+    CHAT = '/:chatId'
 }
 
 export enum ANY_ROUTES {

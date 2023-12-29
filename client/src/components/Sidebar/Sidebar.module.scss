@@ -1,0 +1,13 @@
+@import '../../utils/colors.scss';
+
+.sidebar {
+    width: 360px;
+    border-right: solid 1px $borders;
+}
+
+.sidebarHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px 10px 10px;
+}

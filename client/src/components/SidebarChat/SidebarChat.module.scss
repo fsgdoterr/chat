@@ -1,0 +1,65 @@
+@import '../../utils/colors.scss';
+
+.chat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11.5px 8px;
+    cursor: pointer;
+    transition: .2s ease;
+
+    img {
+        border-radius: 100px;
+        overflow: hidden;
+        min-width: 50px;
+        max-width: 50px;
+        min-height: 50px;
+        max-height: 50px;
+    }
+
+    &:not(.selected):hover {
+        background: $input-bg;
+    }
+}
+
+.selected {
+    background: $borders;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.name {
+    font-weight: 500;
+    line-height: 1.25em;
+}
+
+.message {
+    display: flex;
+    justify-content: space-between;
+}
+
+.viewed {
+    color: $text-low-emphasis;
+}
+
+.messageBody {
+    font-size: 14px;
+    line-height: normal;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    height: 1.2em;
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+}
+
+.messageTime {
+    font-size: 14px;
+    line-height: normal;
+    white-space: nowrap;
+}

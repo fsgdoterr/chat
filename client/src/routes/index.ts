@@ -1,3 +1,4 @@
+import Chat from "../pages/Chat/Chat";
 import Empty from "../pages/Empty/Empty";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import SignIn from "../pages/SignIn/SignIn";
@@ -27,6 +28,11 @@ const routes: IRoute[] = [
         component: Empty,
         modifier: ROUTE_MODIFIER.PRIVATE,
         defaultRoute: true,
+    },
+    {
+        path: PRIVATE_ROUTES.CHAT,
+        component: Chat,
+        modifier: ROUTE_MODIFIER.PRIVATE,
     },
 ];
 
